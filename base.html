@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}App Gráficos Educacionais{% endblock %}</title>
+    <style>
+        /* Estilo Educacional - Tema Claro e Acessível */
+        :root {
+            --primary: #2c3e50;       /* Azul petróleo (títulos) */
+            --secondary: #3498db;     /* Azul interativo */
+            --accent: #e74c3c;        /* Destaques importantes */
+            --light: #f8f9fa;         /* Fundo claro */
+            --text: #333;             /* Texto principal */
+            --success: #27ae60;       /* Confirmações */
+        }
+        
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Mensagens do Sistema */
+        .flash-message {
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+        
+        .error {
+            background-color: #fde8e8;
+            border-left-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .success {
+            background-color: #e8f8f0;
+            border-left-color: var(--success);
+            color: var(--success);
+        }
+        
+        /* Títulos */
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        h1 {
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        /* Tabelas Educacionais */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 12px;
+        }
+        
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+        
+        tr:hover {
+            background-color: #e8f4fc;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }} - Visualização</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        /* Container Principal */
+        .graph-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        /* Título */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 500;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        /* Gráfico */
+        .graph-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Botão Voltar */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 25px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .graph-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="graph-container">
+        <h1>{{ titulo }}</h1>
+        
+        <img src="{{ url_for('static', filename='graphs/' + nome) }}" 
+             alt="Gráfico gerado" 
+             class="graph-image">
+        
+        <a href="{{ url_for('dashboard') }}" class="back-btn">
+            Voltar ao Gerador de Graficos
+        </a>
+    </div>
+</body>
+</html>

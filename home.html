@@ -1,0 +1,6 @@
+{% if request.args.get('graph') %}
+  <h2>Gráfico criado:</h2>
+  <img src="{{ url_for('static', filename='graphs/' + request.args.get('graph')) }}" alt="Gráfico">
+{% endif %}
+<br>
+<a href="{{ url_for('create_graph') }}">Criar novo gráfico</a>

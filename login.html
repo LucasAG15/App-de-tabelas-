@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %}Login - Sistema Educacional{% endblock %}
+{% block content %}
+<style>
+    /* Container Principal */
+    .login-container {
+        max-width: 450px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Título */
+    .login-title {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 500;
+        font-size: 1.8rem;
+        position: relative;
+    }
+    
+    .login-title:after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #3498db;
+        margin: 15px auto 0;
+    }
+    
+    /* Formulário */
+    .login-form {
+        margin-top: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 1rem;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    /* Botão */
+    .login-btn {
+        width: 100%;
+        padding: 14px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+    
+    .login-btn:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+    }
+    
+    /* Link de Cadastro */
+    .register-link {
+        display: block;
+        text-align: center;
+        margin-top: 25px;
+        color: #7f8c8d;
+        transition: color 0.3s;
+        text-decoration: none;
+    }
+    
+    .register-link:hover {
+        color: #3498db;
+        text-decoration: underline;
+    }
+    
+    /* Mensagens de Erro */
+    .alert-error {
+        padding: 12px 15px;
+        background-color: #fde8e8;
+        color: #e74c3c;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border-left: 4px solid #e74c3c;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 576px) {
+        .login-container {
+            padding: 25px 20px;
+            margin: 20px 15px;
+        }
+        
+        .login-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <h1 class="login-title">Acesso ao Sistema</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST" class="login-form">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(class="form-control", placeholder="Digite seu usuário") }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.password.label }}
+            {{ form.password(class="form-control", placeholder="Digite sua senha") }}
+        </div>
+        
+        {{ form.submit(class="login-btn") }}
+        
+        <a href="{{ url_for('register') }}" class="register-link">
+            Não tem conta? Cadastre-se
+        </a>
+    </form>
+</div>
+{% endblock %}

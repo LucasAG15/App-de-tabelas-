@@ -1,0 +1,138 @@
+<!-- templates/create_graph.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Estilo Específico para o Formulário de Gráficos */
+    .graph-form-container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 500;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 25px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
+    
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+    
+    input[type="text"]:focus,
+    select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232c3e50'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 15px;
+    }
+    
+    .form-hint {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        margin-top: 5px;
+        font-style: italic;
+    }
+    
+    .submit-btn {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: block;
+        width: 100%;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .submit-btn:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .graph-form-container {
+            padding: 20px;
+            margin: 20px 15px;
+        }
+        
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="graph-form-container">
+    <h1>Criar Gráfico Educacional</h1>
+    
+    <form method="POST" action="{{ url_for('create_graph') }}">
+        <div class="form-group">
+            <label for="titulo">Título do Gráfico:</label>
+            <input type="text" id="titulo" name="titulo" required placeholder="Ex: Desempenho por Matéria">
+            <p class="form-hint">Um título descritivo para seu gráfico</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="tipo">Tipo de Gráfico:</label>
+            <select id="tipo" name="tipo">
+                <option value="barra">Barras (Comparação entre categorias)</option>
+                <option value="pizza">Pizza (Composição percentual)</option>
+                <option value="linha">Linha (Evolução ao longo do tempo)</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="labels">Categorias/Labels:</label>
+            <input type="text" id="labels" name="labels" required placeholder="Ex: Matemática, Português, Ciências">
+            <p class="form-hint">Separe os itens com vírgula !Obrigatorio para bom funcionamento!</p>
+        </div>
+        
+        <div class="form-group">
+            <label for="valores">Valores Correspondentes:</label>
+            <input type="text" id="valores" name="valores" required placeholder="Ex: 85, 92, 78">
+            <p class="form-hint">Insira os valores na mesma ordem das categorias</p>
+        </div>
+        
+        <button type="submit" class="submit-btn">Gerar Gráfico</button>
+    </form>
+</div>
+{% endblock %}
